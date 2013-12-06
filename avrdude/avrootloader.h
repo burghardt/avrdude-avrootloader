@@ -28,6 +28,7 @@
 extern "C" {
 #endif
 
+extern const char avrootloader_desc[];
 void avrootloader_initpgm (PROGRAMMER * pgm);
 
 #ifdef __cplusplus

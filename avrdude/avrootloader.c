@@ -1033,6 +1033,7 @@ static int avrootloader_read_sig_bytes(PROGRAMMER * pgm, AVRPART * p, AVRMEM * m
 	return 3;
 }
 
+const char avrootloader_desc[] = "Hagen Reddmanns extended capabilities serial programmer";
 
 void avrootloader_initpgm(PROGRAMMER * pgm)
 {

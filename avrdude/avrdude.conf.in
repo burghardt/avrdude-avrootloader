@@ -755,7 +755,7 @@ programmer parent "arduino-ft232r"
 programmer
   id    = "avrootloader";
   desc  = "Hagen Reddmanns extended capabilities serial programmer";
-  type  = avrootloader;
+  type  = "avrootloader";
 ;
 
 programmer

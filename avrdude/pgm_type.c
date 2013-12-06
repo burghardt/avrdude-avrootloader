@@ -49,6 +49,7 @@
 #include "usbasp.h"
 #include "usbtiny.h"
 #include "wiring.h"
+#include "avrootloader.h"
 
 
 const PROGRAMMER_TYPE const programmers_types[] = {
@@ -91,6 +92,7 @@ const PROGRAMMER_TYPE const programmers_types[] = {
         {"usbasp", usbasp_initpgm, usbasp_desc},
         {"usbtiny", usbtiny_initpgm, usbtiny_desc},
         {"wiring", wiring_initpgm, wiring_desc},
+        {"avrootloader", avrootloader_initpgm, avrootloader_desc},
 };
 
 const PROGRAMMER_TYPE * locate_programmer_type(const char * id)
