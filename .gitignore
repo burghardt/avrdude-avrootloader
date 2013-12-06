@@ -60,3 +60,8 @@ avrdude/windows/Makefile.in
 avrdude/y.output
 avrdude/y.tab.h
 avrdude/ylwrap
+cscope.files
+cscope.in.out
+cscope.out
+cscope.po.out
+tags
