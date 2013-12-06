@@ -56,6 +56,7 @@ struct serial_device
   int (*drain)(union filedescriptor *fd, int display);
 
   int (*set_dtr_rts)(union filedescriptor *fd, int is_on);
+  int (*probe)(union filedescriptor *fd, long serial_sel_timeout);
 
   int flags;
 #define SERDEV_FL_NONE         0x0000 /* no flags */
@@ -75,5 +76,6 @@ extern struct serial_device avrdoper_serdev;
 #define serial_recv (serdev->recv)
 #define serial_drain (serdev->drain)
 #define serial_set_dtr_rts (serdev->set_dtr_rts)
+#define serial_probe (serdev->probe)
 
 #endif /* serial_h */

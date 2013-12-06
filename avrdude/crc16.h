@@ -5,10 +5,16 @@
 extern "C" {
 #endif
 
+extern unsigned int calcCRC16r(unsigned int crc, unsigned int c, unsigned int
+mask);
+
+
 /*
  * Derived from CRC algorithm for JTAG ICE mkII, published in Atmel
  * Appnote AVR067.  Converted from C++ to C.
  */
+extern unsigned short CRC(unsigned short crcval, unsigned char newchar);
+
 
 extern unsigned short crcsum(const unsigned char* message,
 			     unsigned long length,

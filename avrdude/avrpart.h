@@ -105,6 +105,7 @@ typedef struct opcode {
 typedef struct avrpart {
   char          desc[AVR_DESCLEN];  /* long part name */
   char          id[AVR_IDLEN];      /* short part name */
+  unsigned int	sram;				/* SRAM size in bytes */
   int           stk500_devcode;     /* stk500 device code */
   int           avr910_devcode;     /* avr910 device code */
   int           chip_erase_delay;   /* microseconds */

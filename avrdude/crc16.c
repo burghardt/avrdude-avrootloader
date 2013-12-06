@@ -40,10 +40,26 @@ static const unsigned short crc_table[256] = {
   0x7bc7, 0x6a4e, 0x58d5, 0x495c, 0x3de3, 0x2c6a, 0x1ef1, 0x0f78
 };
 
+unsigned int calcCRC16r(unsigned int crc, unsigned int c, unsigned int
+mask)
+{
+  unsigned char i;
+  for(i=0;i<8;i++)
+  {
+    if((crc ^ c) & 1) { crc=(crc>>1)^mask; }
+    else crc>>=1;
+    c>>=1;
+  }
+  return (crc);
+}
+
 /* CRC calculation macros */
 #define CRC_INIT 0xFFFF
-#define CRC(crcval,newchar) crcval = (crcval >> 8) ^ \
-	crc_table[(crcval ^ newchar) & 0x00ff]
+
+unsigned short CRC(unsigned short crcval, unsigned char newchar)
+{
+	return ((crcval >> 8) ^ crc_table[(crcval ^ newchar) & 0x00ff]);
+}
 
 unsigned short
 crcsum(const unsigned char* message, unsigned long length,
@@ -53,7 +69,7 @@ crcsum(const unsigned char* message, unsigned long length,
 
   for(i = 0; i < length; i++)
     {
-      CRC(crc, message[i]);
+      crc = CRC(crc, message[i]);
     }
   return crc;
 }

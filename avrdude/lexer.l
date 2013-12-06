@@ -120,6 +120,8 @@ SIGN     [+-]
             lineno); 
             exit(1); }
 
+avrootloader     { yylval=NULL; return K_AVROOTLOADER; }
+sram             { yylval=NULL; return K_SRAM; }
 allowfullpagebitstream { yylval=NULL; return K_ALLOWFULLPAGEBITSTREAM; }
 avr910_devcode   { yylval=NULL; return K_AVR910_DEVCODE; }
 bank_size        { yylval=NULL; return K_PAGE_SIZE; }

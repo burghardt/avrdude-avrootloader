@@ -278,6 +278,10 @@ static int ser_send(union filedescriptor *fd, unsigned char * buf, size_t buflen
 	return 0;
 }
 
+static int ser_probe(union filedescriptor *fd, long serial_sel_timeout)
+{
+	return 0; // is there something like select for win?
+}
 
 static int ser_recv(union filedescriptor *fd, unsigned char * buf, size_t buflen)
 {

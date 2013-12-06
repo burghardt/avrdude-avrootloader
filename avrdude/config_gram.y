@@ -42,6 +42,7 @@
 #define strtok_r( _s, _sep, _lasts ) \
     ( *(_lasts) = strtok( (_s), (_sep) ) )
 #endif
+#include "avrootloader.h"
 
 int yylex(void);
 int yyerror(char * errmsg);
@@ -69,6 +70,7 @@ static int pin_name;
 
 %token K_MEMORY
 
+%token K_SRAM
 %token K_PAGE_SIZE
 %token K_PAGED
 
@@ -139,6 +141,7 @@ static int pin_name;
 %token K_TIMEOUT
 %token K_STABDELAY
 %token K_CMDEXEDELAY
+%token K_AVROOTLOADER
 %token K_HVSPCMDEXEDELAY
 %token K_SYNCHLOOPS
 %token K_BYTEDELAY
@@ -453,6 +456,12 @@ prog_parm :
   |
   prog_parm_conntype
   |
+  K_TYPE TKN_EQUAL K_AVROOTLOADER {
+    { 
+      avrootloader_initpgm(current_prog);
+    }
+  } |
+
   K_DESC TKN_EQUAL TKN_STRING {
     strncpy(current_prog->desc, $3->value.string, PGM_DESCLEN);
     current_prog->desc[PGM_DESCLEN-1] = 0;
@@ -652,6 +661,13 @@ part_parm :
       current_part->stk500_devcode = $3->value.number;
       free_token($3);
     }
+  } |
+
+  K_SRAM			TKN_EQUAL TKN_NUMBER {
+    {
+	  current_part->sram = $3->value.number;
+	  free_token($3);
+	 }
   } |
 
   K_AVR910_DEVCODE TKN_EQUAL TKN_NUMBER {

@@ -356,6 +356,20 @@ static int ser_send(union filedescriptor *fd, unsigned char * buf, size_t buflen
   return 0;
 }
 
+static int ser_probe(union filedescriptor *fd, long serial_sel_timeout)
+{
+  struct timeval timeout, to2;
+  fd_set rfds;
+
+  timeout.tv_sec  = serial_sel_timeout / 1000L;
+  timeout.tv_usec = (serial_sel_timeout % 1000L) * 1000;
+  to2 = timeout;
+
+	FD_ZERO(&rfds);
+    FD_SET(fd->ifd, &rfds);
+
+    return select(fd->ifd + 1, &rfds, NULL, NULL, &to2);
+}
 
 static int ser_recv(union filedescriptor *fd, unsigned char * buf, size_t buflen)
 {
@@ -495,6 +509,7 @@ struct serial_device serial_serdev =
   .recv = ser_recv,
   .drain = ser_drain,
   .set_dtr_rts = ser_set_dtr_rts,
+  .probe = ser_probe,
   .flags = SERDEV_FL_CANSETSPEED,
 };
 
